@@ -66,7 +66,14 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "BufReadPost",
-		opts = {},
+		opts = {
+			enable = true,
+			multiwindow = false,
+			max_lines = 2,
+			multiline_threshold = 2,
+			trim_scope = "outer",
+			mode = "topline",
+		},
 	},
 	{
 		"bennypowers/template-literal-comments.nvim",

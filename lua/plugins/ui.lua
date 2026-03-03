@@ -1,26 +1,26 @@
 local u = require("utils")
 return {
-	{
-		"akinsho/bufferline.nvim", -- bufferline
-		event = "VeryLazy",
-		opts = {
-			options = {
-				diagnostics = "nvim_lsp",
-				always_show_bufferline = false,
-				offsets = {
-					{
-						filetype = "NvimTree",
-						text = "File Explorer",
-						highlight = "Directory",
-						text_align = "left",
-					},
-				},
-			},
-		},
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
+	-- {
+	-- 	"akinsho/bufferline.nvim", -- bufferline
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		options = {
+	-- 			diagnostics = "nvim_lsp",
+	-- 			always_show_bufferline = false,
+	-- 			offsets = {
+	-- 				{
+	-- 					filetype = "NvimTree",
+	-- 					text = "File Explorer",
+	-- 					highlight = "Directory",
+	-- 					text_align = "left",
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 	},
+	-- 	dependencies = {
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- },
 	{
 		"nvim-lualine/lualine.nvim", -- status line
 		event = "VeryLazy",
@@ -37,17 +37,9 @@ return {
 					{ "diagnostics" },
 					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 					{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
-					{
-						function()
-							return require("nvim-navic").get_location()
-						end,
-						cond = function()
-							return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-						end,
-					},
 				},
 				lualine_y = {
-					{ "progress", separator = "",                   padding = { left = 1, right = 0 } },
+					{ "progress", separator = "", padding = { left = 1, right = 0 } },
 					{ "location", padding = { left = 0, right = 1 } },
 				},
 				lualine_z = {
@@ -94,20 +86,6 @@ return {
 			})
 			require("mini.indentscope").setup(opts)
 		end,
-	},
-
-	{
-		"SmiteshP/nvim-navic",
-		lazy = true,
-		init = function()
-			-- vim.g.navic_silence = true
-			require("utils").on_attach(function(client, buffer)
-				if client.server_capabilities.documentSymbolProvider then
-					require("nvim-navic").attach(client, buffer)
-				end
-			end)
-		end,
-		opts = { separator = " ", highlight = true, depth_limit = 5 },
 	},
 
 	{
