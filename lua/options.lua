@@ -32,7 +32,7 @@ vim.o.softtabstop = 2
 -- search
 vim.o.hlsearch = true
 vim.o.incsearch = true
-vim.o.ignorecase = false
+vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- wrap
