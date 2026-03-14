@@ -114,12 +114,9 @@ return {
 	},
 	{
 		"j-hui/fidget.nvim",
-		-- event = "VeryLazy",
 		ft = u.coding_ft,
 		opts = {},
-		-- event = "VeryLazy"
 	},
-	-- { "kosayoda/nvim-lightbulb", dependencies = "antoinemadec/FixCursorHold.nvim" },
 	{
 		"gorbit99/codewindow.nvim",
 		config = function()

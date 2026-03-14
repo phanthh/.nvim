@@ -22,6 +22,5 @@ require("null-ls").setup({
 		nls.builtins.diagnostics.sqlfluff.with({
 			extra_args = { "--dialect", "postgres" }, -- change to your dialect
 		}),
-		-- require("typescript.extensions.null-ls.code-actions"),
 	},
 })
