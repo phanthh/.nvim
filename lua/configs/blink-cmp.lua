@@ -21,29 +21,39 @@ require("blink.cmp").setup({
 	cmdline = {
 		sources = function()
 			local type = vim.fn.getcmdtype()
-			if type == "/" or type == "?" then return { "buffer" } end
-			if type == ":" then return { "cmdline", "path" } end
+			if type == "/" or type == "?" then
+				return { "buffer" }
+			end
+			if type == ":" then
+				return { "cmdline", "path" }
+			end
 			return {}
 		end,
 	},
 
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer", "dictionary" },
+		default = {
+			"lsp",
+			"path",
+			"snippets",
+			"buffer",
+			-- "dictionary"
+		},
 		per_filetype = {
 			sql = { "dadbod", "buffer" },
 			mysql = { "dadbod", "buffer" },
 			plsql = { "dadbod", "buffer" },
 		},
 		providers = {
-			dictionary = {
-				module = "blink-cmp-dictionary",
-				name = "Dict",
-				min_keyword_length = 2,
-				max_items = 5,
-				opts = {
-					dictionary_files = { "/usr/share/dict/american-english" },
-				},
-			},
+			-- dictionary = {
+			-- 	module = "blink-cmp-dictionary",
+			-- 	name = "Dict",
+			-- 	min_keyword_length = 2,
+			-- 	max_items = 5,
+			-- 	opts = {
+			-- 		dictionary_files = { "/usr/share/dict/american-english" },
+			-- 	},
+			-- },
 			dadbod = {
 				name = "Dadbod",
 				module = "vim_dadbod_completion.blink",
