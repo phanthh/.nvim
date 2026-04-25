@@ -105,11 +105,9 @@ return {
 		event = "VeryLazy",
 		opts = {
 			no_exec_files = { "vim" },
-			highlight = {
-
-				bg = "#16161E",
-				fg = "#d79921",
-			},
+			highlight = function()
+				vim.api.nvim_set_hl(0, "ColorfulWinSep", { fg = "#d79921", bg = "#16161E" })
+			end,
 		},
 	},
 	{

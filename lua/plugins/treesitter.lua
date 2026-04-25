@@ -1,50 +1,54 @@
+local parsers = {
+	"latex",
+	"bibtex",
+	"markdown",
+	"markdown_inline",
+	"c",
+	"cpp",
+	"graphql",
+	"rust",
+	"javascript",
+	"typescript",
+	"tsx",
+	"css",
+	"scss",
+	"html",
+	"lua",
+	"luadoc",
+	"python",
+	"r",
+	"scala",
+	"vimdoc",
+	"http",
+	"bash",
+	"toml",
+	"json",
+	"prisma",
+	"sql",
+	"glimmer",
+}
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
 		build = ":TSUpdate",
-		event = "BufReadPost",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "markdown" },
-				},
-				indent = { enable = true },
-				rainbow = {
-					enable = false,
-					-- query = "rainbow-parens",
-					extended_mode = true,
-					strategy = require("ts-rainbow.strategy.global"),
-				},
-				context_commentstring = { enable = true },
-				ensure_installed = {
-					"latex",
-					"bibtex",
-					"markdown",
-					"c",
-					"cpp",
-					"graphql",
-					"rust",
-					"javascript",
-					"typescript",
-					"tsx",
-					"css",
-					"scss",
-					"html",
-					"lua",
-					"luadoc",
-					"python",
-					"r",
-					"scala",
-					"vimdoc",
-					"http",
-					"bash",
-					"toml",
-					"json",
-					"prisma",
-					"sql",
-					"glimmer",
-				},
+			require("nvim-treesitter").setup({
+				install_dir = vim.fn.stdpath("data") .. "/site",
+			})
+			require("nvim-treesitter").install(parsers)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					if not pcall(vim.treesitter.start, args.buf) then
+						return
+					end
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					if args.match == "markdown" then
+						vim.bo[args.buf].syntax = "ON"
+					end
+				end,
 			})
 		end,
 		dependencies = {
@@ -60,7 +64,6 @@ return {
 					})
 				end,
 			},
-			"HiPhish/nvim-ts-rainbow2",
 		},
 	},
 	{
@@ -78,7 +81,6 @@ return {
 	{
 		"bennypowers/template-literal-comments.nvim",
 		event = "BufReadPost",
-		config = true,
 		ft = { "javascript", "typescript" },
 	},
 }
