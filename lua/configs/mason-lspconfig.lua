@@ -23,12 +23,12 @@ require("mason-lspconfig").setup({
 })
 
 km("n", "<leader>e", vim.diagnostic.open_float)
-km("n", "[d", vim.diagnostic.goto_prev)
-km("n", "]d", vim.diagnostic.goto_next)
+km("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+km("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
 km("n", "<leader>q", vim.diagnostic.setloclist)
 
 local on_attach = function(client, bufnr)
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 	kmb(bufnr, "n", "gD", vim.lsp.buf.declaration)
 	kmb(bufnr, "n", "gd", vim.lsp.buf.definition)
 	kmb(bufnr, "n", "K", function()
@@ -51,10 +51,6 @@ local on_attach = function(client, bufnr)
 	end)
 end
 
-local handlers = {
-	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-}
-
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 vim.lsp.config("lua_ls", {
@@ -72,7 +68,6 @@ for i = 1, #lsps do
 	vim.lsp.config(lsp, {
 		on_attach = on_attach,
 		capabilities = capabilities,
-		handlers = handlers,
 	})
 	vim.lsp.enable(lsp)
 end
@@ -117,22 +112,22 @@ local vtsls_on_attach = function(client, bufnr)
 	end)
 	-- Go to source definition (skips .d.ts)
 	kmb(bufnr, "n", "gD", function()
-		local params = vim.lsp.util.make_position_params(0)
-		vim.lsp.buf.execute_command({
+		local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+		client:exec_cmd({
 			command = "typescript.goToSourceDefinition",
 			arguments = { params.textDocument.uri, params.position },
 		})
 	end)
 	-- Find all file references (what imports this file)
 	kmb(bufnr, "n", "gR", function()
-		vim.lsp.buf.execute_command({
+		client:exec_cmd({
 			command = "typescript.findAllFileReferences",
 			arguments = { vim.uri_from_bufnr(bufnr) },
 		})
 	end)
 	-- Select TypeScript version
 	kmb(bufnr, "n", "<leader>cV", function()
-		vim.lsp.buf.execute_command({ command = "typescript.selectTypeScriptVersion" })
+		client:exec_cmd({ command = "typescript.selectTypeScriptVersion" })
 	end)
 end
 
@@ -154,7 +149,6 @@ local ts_settings = {
 vim.lsp.config("vtsls", {
 	on_attach = vtsls_on_attach,
 	capabilities = capabilities,
-	handlers = handlers,
 	settings = {
 		vtsls = {
 			enableMoveToFileCodeAction = true,

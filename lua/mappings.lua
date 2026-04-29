@@ -17,18 +17,18 @@ km("n", "<leader>q", "<cmd>q!<cr>")
 km("n", "s", "<Plug>(leap-forward)")
 km("n", "S", "<Plug>(leap-backward)")
 
-local clients = {
-	"bashls",
-	"pyright",
-	"lua_ls",
-	"tsserver",
-	"rust_analyzer",
-} -- blacklisted clients
+local format_blacklist = {
+	bashls = true,
+	pyright = true,
+	lua_ls = true,
+	vtsls = true,
+	rust_analyzer = true,
+}
 
 local function format_save_func()
 	vim.lsp.buf.format({
 		filter = function(client)
-			return clients[client.name] == nil
+			return not format_blacklist[client.name]
 		end,
 	})
 end

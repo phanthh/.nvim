@@ -15,7 +15,6 @@ return {
 			require("supermaven-nvim").setup({})
 			require("configs.blink-cmp")
 			require("lspconfig")
-			vim.cmd([[LspStart]])
 		end,
 	},
 }
