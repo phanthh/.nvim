@@ -102,9 +102,11 @@ km("n", "<leader>rh", "<cmd>IronHide<cr>")
 -- km("i", "<c-l>", "<esc><cmd>Telekasten insert_link<cr>")
 -- km("n", "<Tab>", "<esc><cmd>Telekasten follow_link<cr>")
 
--- trouble
-km("n", "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>")
-km("n", "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>")
+-- trouble (v3 syntax)
+km("n", "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
+km("n", "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>")
+km("n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>")
+km("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>")
 
 -- dap
 km("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>")

@@ -89,26 +89,9 @@ return {
 	},
 
 	{
-		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("lsp_lines").setup({})
-			vim.diagnostic.config({
-				virtual_text = false,
-				virtual_lines = false,
-			})
-		end,
-	},
-
-	{
 		"nvim-zh/colorful-winsep.nvim",
-		event = "VeryLazy",
-		opts = {
-			no_exec_files = { "vim" },
-			highlight = function()
-				vim.api.nvim_set_hl(0, "ColorfulWinSep", { fg = "#d79921", bg = "#16161E" })
-			end,
-		},
+		event = { "WinLeave" },
+		config = true,
 	},
 	{
 		"j-hui/fidget.nvim",

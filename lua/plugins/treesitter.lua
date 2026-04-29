@@ -81,6 +81,6 @@ return {
 	{
 		"bennypowers/template-literal-comments.nvim",
 		event = "BufReadPost",
-		ft = { "javascript", "typescript" },
+		ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
 	},
 }

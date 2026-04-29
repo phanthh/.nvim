@@ -27,8 +27,29 @@ km("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
 km("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
 km("n", "<leader>q", vim.diagnostic.setloclist)
 
+vim.diagnostic.config({
+	severity_sort = true,
+	float = { border = "rounded", source = "if_many" },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+	},
+	virtual_text = false,
+	virtual_lines = { current_line = true },
+})
+
 local on_attach = function(client, bufnr)
 	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+	if client:supports_method("textDocument/codeLens") then
+		vim.lsp.codelens.enable(true, { bufnr = bufnr })
+	end
+	if client:supports_method("textDocument/documentColor") then
+		vim.lsp.document_color.enable(true, { bufnr = bufnr })
+	end
 	kmb(bufnr, "n", "gD", vim.lsp.buf.declaration)
 	kmb(bufnr, "n", "gd", vim.lsp.buf.definition)
 	kmb(bufnr, "n", "K", function()
@@ -46,6 +67,8 @@ local on_attach = function(client, bufnr)
 	-- kmb(bufnr, "n", "<leader>ca", vim.lsp.buf.code_action)
 	kmb(bufnr, "n", "<leader>ca", require("actions-preview").code_actions)
 	kmb(bufnr, "n", "gr", vim.lsp.buf.references)
+	kmb(bufnr, "n", "grx", vim.lsp.codelens.run)
+	kmb(bufnr, "n", "<leader>wd", vim.lsp.buf.workspace_diagnostics)
 	kmb(bufnr, "n", "<leader>f", function()
 		vim.lsp.buf.format({ async = false })
 	end)
