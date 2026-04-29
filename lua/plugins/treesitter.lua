@@ -36,8 +36,8 @@ return {
 		config = function()
 			require("nvim-treesitter").setup({
 				install_dir = vim.fn.stdpath("data") .. "/site",
+				ensure_installed = parsers,
 			})
-			require("nvim-treesitter").install(parsers)
 
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function(args)
