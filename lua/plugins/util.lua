@@ -7,14 +7,13 @@ return {
 		end,
 	},
 	{
-		"ellisonleao/glow.nvim",
-		cmd = "Glow",
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			border = "single",
-			style = "dark",
-			pager = false,
-			width_ratio = 0.9,
-			height_ratio = 0.9,
+			preview = {
+				icon_provider = "devicons",
+			},
 		},
 	},
 	-- {

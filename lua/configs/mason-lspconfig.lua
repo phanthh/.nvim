@@ -170,6 +170,14 @@ local ts_settings = {
 }
 
 vim.lsp.config("vtsls", {
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"javascript.jsx",
+		"typescript",
+		"typescriptreact",
+		"typescript.tsx",
+	},
 	on_attach = vtsls_on_attach,
 	capabilities = capabilities,
 	settings = {
