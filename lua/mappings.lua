@@ -21,7 +21,7 @@ local format_blacklist = {
 	bashls = true,
 	pyright = true,
 	lua_ls = true,
-	vtsls = true,
+	tsgo = true,
 	rust_analyzer = true,
 }
 

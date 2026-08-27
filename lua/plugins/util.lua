@@ -99,5 +99,5 @@ return {
 		end,
 	},
 	"nvim-lua/plenary.nvim",
-{ "mechatroner/rainbow_csv", ft = { "csv" } },
+	{ "mechatroner/rainbow_csv", ft = { "csv" } },
 }

@@ -32,6 +32,15 @@ return {
 	"neovim/nvim-lspconfig",
 	"nvimtools/none-ls.nvim",
 	{
+		"zeioth/garbage-day.nvim",
+		event = "VeryLazy",
+		opts = {
+			grace_period = 60 * 15,
+			wakeup_delay = 500,
+			notifications = false,
+		},
+	},
+	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			{
