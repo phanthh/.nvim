@@ -6,16 +6,6 @@ return {
 			vim.g.startuptime_tries = 10
 		end,
 	},
-	{
-		"OXY2DEV/markview.nvim",
-		lazy = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			preview = {
-				icon_provider = "devicons",
-			},
-		},
-	},
 	-- {
 	-- 	"rest-nvim/rest.nvim",
 	-- 	ft = { "http" },
@@ -86,6 +76,11 @@ return {
 		cmd = "DiffviewOpen",
 		config = function()
 			require("diffview").setup({
+				file_panel = {
+					win_config = {
+						position = "right",
+					},
+				},
 				enhanced_diff_hl = true,
 				view = {
 					merge_tool = {

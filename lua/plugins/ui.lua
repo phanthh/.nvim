@@ -60,7 +60,7 @@ return {
 				char = "│",
 			},
 			exclude = {
-				buftypes = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy", "markview" },
+				buftypes = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy" },
 			},
 			scope = {
 				show_start = false,
@@ -79,7 +79,7 @@ return {
 		},
 		config = function(_, opts)
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy", "mason", "markview" },
+				pattern = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy", "mason" },
 				callback = function()
 					vim.b.miniindentscope_disable = true
 				end,
