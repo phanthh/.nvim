@@ -12,7 +12,6 @@ return {
 			require("configs.mason-lspconfig")
 			require("configs.mason-null-ls")
 			require("configs.mason-nvim-dap")
-			require("supermaven-nvim").setup({})
 			require("configs.blink-cmp")
 			require("lspconfig")
 		end,

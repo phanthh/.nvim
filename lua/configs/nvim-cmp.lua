@@ -18,7 +18,7 @@ cmp.setup({
 				require("tailwind-tools.cmp").lspkind_format(entry, vim_item)
 				return vim_item
 			end,
-			symbol_map = { Codeium = "", Supermaven = "" },
+			symbol_map = { Codeium = "" },
 		}),
 	},
 	snippet = {
@@ -65,7 +65,6 @@ cmp.setup({
 		{ name = "path" },
 	}, {
 		-- { name = "codeium", max_item_count = 2 },
-		-- { name = "supermaven", max_item_count = 2 },
 		-- { name = "cmp_ai",     max_item_count = 5 },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
