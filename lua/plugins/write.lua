@@ -30,6 +30,12 @@ return {
 		},
 	},
 	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
+	{
 		"swaits/thethethe.nvim",
 		event = "VeryLazy",
 		ft = { "markdown" },

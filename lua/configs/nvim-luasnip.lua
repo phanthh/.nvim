@@ -285,7 +285,7 @@ ls.add_snippets("tex", {
 
 -- Markdown
 ls.add_snippets("markdown", mdformat, { type = "autosnippets" })
-ls.add_snippets("markdown", mathh, { type = "autosnippets" })
+-- ls.add_snippets("markdown", mathh, { type = "autosnippets" })
 ls.add_snippets("markdown", {
 	s("fm", {
 		t({ "---", "" }),
